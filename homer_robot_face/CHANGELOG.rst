@@ -2,6 +2,9 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.17 (2017-03-20)
+-------------------
+
 1.0.15 (2017-03-10)
 -------------------
 * expected input added to robot face
