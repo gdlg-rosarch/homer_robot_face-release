@@ -11,14 +11,14 @@ import wave
 
 from std_msgs.msg import String, Empty
 from dynamic_reconfigure.server import Server
-# from homer_mary_tts.cfg import MaryTTSConfig
+# from homer_tts.cfg import MaryTTSConfig
 
 import rospy
 
 from dynamic_reconfigure.server import Server
 # from dynamic_tutorials.cfg import TutorialsConfig
 # from dynamic_tutorials.cfg import MaryTTSConfig
-from homer_mary_tts.cfg import MaryTTSConfig
+from homer_tts.cfg import MaryTTSConfig
 
 class MarryTTsSpeak:
 
@@ -40,11 +40,7 @@ class MarryTTsSpeak:
   def retrive_wav(self, filename, text):
     processed_text = urllib2.quote(text)
     print(processed_text)
-    # write file with txt
-    file = open("/tmp/lisa_flite_text", "w")
-    file.write(text)
-    file.close()
-    os.system("flite /tmp/lisa_flite_text -voice slt -o "+filename)
+    os.system("pico2wave \""+processed_text+"\" --lang=en-US --wave="+filename)
 
 
   def play_wav_file(self, filename):
@@ -75,8 +71,8 @@ class MarryTTsSpeak:
       self.text_queue.pop(0)
       self.talking_finished_pub.publish(msg)
 
-rospy.init_node('flite_tts')
+rospy.init_node('pico_tts')
 MarryTTsSpeak()
 rospy.sleep(1.0)
-rospy.loginfo("flite tts node is now running")
+rospy.loginfo("pico tts node is now running")
 rospy.spin()
